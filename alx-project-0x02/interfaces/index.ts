@@ -11,10 +11,15 @@ export interface CardProps {
   content: string;
 }
 
+// interfaces/index.ts
+
 export interface PostProps {
+  id: number;
   title: string;
   content: string;
+  userId: number;
 }
+
 
 export interface PostModalProps {
   isOpen: boolean;
