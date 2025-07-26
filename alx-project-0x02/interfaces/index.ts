@@ -1,10 +1,16 @@
 // interfaces/index.ts
 
 export interface UserProps {
-  id: string;
+  id: number;
   name: string;
   email: string;
+  address: {
+    street: string;
+    city: string;
+    zipcode: string;
+  };
 }
+
 
 export interface CardProps {
   title: string;
