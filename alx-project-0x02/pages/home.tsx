@@ -1,14 +1,39 @@
-import React from "react";
+// pages/home.tsx
+
+import React, { useState } from "react";
 import Card from "@/components/common/Card";
+import PostModal from "@/components/common/PostModal";
+import { type PostProps } from "@/interfaces";
 
 const HomePage = () => {
-  return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold">Welcome to the Home Page</h1>
+  const [posts, setPosts] = useState<PostProps[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-      <Card title="Project Autonomy" content="SoloForge helps you master building full projects independently." />
-      <Card title="Reusable Components" content="Create reusable components like this card to speed up development." />
-      <Card title="Clean Design" content="Keep your UI clean and readable using Tailwind and consistent layouts." />
+  const handleAddPost = (post: PostProps) => {
+    setPosts((prev) => [...prev, post]);
+  };
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Home Page</h1>
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="mb-4 px-4 py-2 bg-green-600 text-white rounded"
+      >
+        Add New Post
+      </button>
+
+      <div className="grid gap-4">
+        {posts.map((post, index) => (
+          <Card key={index} title={post.title} content={post.content} />
+        ))}
+      </div>
+
+      <PostModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddPost}
+      />
     </div>
   );
 };
